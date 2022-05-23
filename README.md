@@ -1,2 +1,0 @@
-# fundamentos-python
-Estudos Python
