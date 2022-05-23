@@ -1,7 +1,23 @@
 version: "3.9"
+
 services:
 
-  pokemon-service:
+  service-mongodb:
+    container_name: mongodb-server
+    image: mongo # https://hub.docker.com/_/mongo
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - .docker/fake-db:/data/db # Mapeando 'docker/fake-db' com container
+      - .docker/fake-db-log:/log # Mapeando 'docker/fake-db-log' com container
+    ports:
+      - "27017:27017"
+    networks:
+      - network_pokemon
+    restart: unless-stopped
+
+  service-backend:
     container_name: pokemon-app
     image: pokemon-app:latest
     build:
@@ -9,7 +25,17 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
+    depends_on:
+      - service-mongodb
+    networks:
+      - network_pokemon
     tty:
       true
     restart:
       unless-stopped
+
+volumes:
+  .docker:
+
+networks:
+  network_pokemon: { }
