@@ -5,6 +5,8 @@ services:
   service-mongodb:
     container_name: container-mongodb
     image: mongo # https://hub.docker.com/_/mongo
+    env_file:
+      - .env
     environment:
       - PUID=1000
       - PGID=1000
@@ -19,9 +21,9 @@ services:
 
   service-mysql-db:
     container_name: container-mysqldb
+    image: mysql:oracle
     env_file:
       - .env
-    image: mysql:oracle
     ports:
       - "3306:3306"
     volumes:
@@ -29,10 +31,13 @@ services:
     networks:
       - network_pokemon
 
-
   service-backend:
     container_name: pokemon-app
     image: pokemon-app:latest
+    env_file:
+      - .env
+    environment:
+      - URL_CONEXAO_MONGODB=mongodb://container-mongodb:27017/pokemon-detalhes-db
     build:
       context: .
       dockerfile: Dockerfile

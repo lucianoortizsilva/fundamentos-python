@@ -1,11 +1,17 @@
 import logging
+from decouple import config
 
 logging.basicConfig(level=logging.INFO)
 
 
 def get_connection_mongo_db():
     logging.info('>>> [Conectando MongoDB] pokemon-detalhes-db')
-    url_conexao = 'mongodb://localhost:27017/pokemon-detalhes-db'
+
+    print('############################')
+    print(config('URL_CONEXAO_MONGODB'))
+    print('############################')
+
+    url_conexao = config('URL_CONEXAO_MONGODB')
     from pymongo import MongoClient
     client = MongoClient(url_conexao)
     return client['pokemon-detalhes-db'];
