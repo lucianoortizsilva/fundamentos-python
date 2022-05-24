@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_restful import Api
 from waitress import serve  # https://pypi.org/project/waitress/
-from repository import conexao_mongo_db
+from repository import setup
 from api.pokemon import Pokemon
 
 import logging
@@ -15,7 +15,7 @@ def config_log():
 
 def config_server():
     with app.app_context():
-        conexao_mongo_db.inserir_carga_dados_inicial()
+        setup.inserir_carga_dados_inicial()
     api = Api(app)
     api.add_resource(Pokemon, '/api/pokemons')
 
