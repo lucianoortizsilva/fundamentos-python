@@ -14,7 +14,6 @@ def inserir_carga_dados_inicial():
                 detalhes.append(obj)
         db = database.get_connection_mongo_db()
         pokemonDetalhes = db['pokemonDetalhes']
-        pokemonDetalhes.delete_many({})
         pokemonDetalhes.insert_many(detalhes)
         logging.info('[pokemon-detalhes-db] - Dados inseridos com sucesso')
     except Exception:

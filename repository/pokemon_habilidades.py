@@ -8,3 +8,4 @@ class PokemonHabilidadesRepository:
 
     def find_all_habilidades(self):
         print('Buscar habilidades ...')
+        return []

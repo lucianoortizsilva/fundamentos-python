@@ -2,6 +2,7 @@ from flask import jsonify
 from flask_restful import Resource
 from repository.pokemon import PokemonRepository
 from repository.pokemon_detalhes import PokemonDetalhesRepository
+from repository.pokemon_habilidades import PokemonHabilidadesRepository
 
 import logging
 
@@ -28,5 +29,12 @@ class Pokemon(Resource):
         repository = PokemonDetalhesRepository()
         detalhes = repository.find_all_detalhes()
         logging.info('Total de detalhes encontrados: %s', len(detalhes))
+
+        logging.info('--------------------------------------------')
+
+        logging.info('3º > Buscando habilidades na base de dados [Mysql]')
+        repository = PokemonHabilidadesRepository()
+        habilidades = repository.find_all_habilidades()
+        logging.info('Total de habilidades encontrados: %s', len(habilidades))
 
         return jsonify(pokemons)

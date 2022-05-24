@@ -3,19 +3,32 @@ version: "3.9"
 services:
 
   service-mongodb:
-    container_name: mongodb-server
+    container_name: container-mongodb
     image: mongo # https://hub.docker.com/_/mongo
     environment:
       - PUID=1000
       - PGID=1000
     volumes:
-      - .docker/fake-db:/data/db # Mapeando 'docker/fake-db' com container
-      - .docker/fake-db-log:/log # Mapeando 'docker/fake-db-log' com container
+      - .docker/db-mongo:/data/db # Mapeando 'docker/fake-db' com container
+      - .docker/db-mongo-log:/log # Mapeando 'docker/fake-db-log' com container
     ports:
       - "27017:27017"
+    restart: unless-stopped
     networks:
       - network_pokemon
-    restart: unless-stopped
+
+  service-mysql-db:
+    container_name: container-mysqldb
+    env_file:
+      - .env
+    image: mysql:oracle
+    ports:
+      - "3306:3306"
+    volumes:
+      - .docker/db-mysql:/var/lib/mysql
+    networks:
+      - network_pokemon
+
 
   service-backend:
     container_name: pokemon-app
@@ -25,14 +38,16 @@ services:
       dockerfile: Dockerfile
     ports:
       - "5000:5000"
+    entrypoint: ./entrypoint.sh
     depends_on:
       - service-mongodb
-    networks:
-      - network_pokemon
+      - service-mysql-db
     tty:
       true
     restart:
       unless-stopped
+    networks:
+      - network_pokemon
 
 volumes:
   .docker:
