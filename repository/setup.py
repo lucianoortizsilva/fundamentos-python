@@ -1,4 +1,4 @@
-from repository import conexao_mongo_db
+from repository import database
 import logging
 import csv
 
@@ -12,7 +12,7 @@ def inserir_carga_dados_inicial():
             for row in reader:
                 obj = dict({'pokemon_id': int(row[0]), 'geracao': int(row[1]), 'lendario': bool(row[2])})
                 detalhes.append(obj)
-        db = conexao_mongo_db.get_database()
+        db = database.get_connection_mongo_db()
         pokemonDetalhes = db['pokemonDetalhes']
         pokemonDetalhes.delete_many({})
         pokemonDetalhes.insert_many(detalhes)

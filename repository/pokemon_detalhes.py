@@ -1,5 +1,4 @@
-from repository import conexao_mongo_db
-import logging
+from repository import database
 
 
 ##############################################
@@ -8,7 +7,7 @@ import logging
 class PokemonDetalhesRepository:
 
     def __init__(self):
-        self.db = conexao_mongo_db.get_database()
+        self.db = database.get_connection_mongo_db()
 
     def find_all_detalhes(self):
         collection_pokemon_detalhes = self.db['pokemonDetalhes']
