@@ -4,6 +4,7 @@ from repository.pokemon import PokemonRepository
 from repository.pokemon_detalhes import PokemonDetalhesRepository
 from repository.pokemon_habilidades import PokemonHabilidadesRepository
 import logging
+from addict import Dict
 
 # https://flask-restful.readthedocs.io/en/latest/quickstart.html
 # https://www.datacamp.com/tutorial/json-data-python
@@ -58,12 +59,7 @@ def merge(pokemons, detalhes, habilidades):
         response = Response()
         response.id = int(p['id'])
         response.nome = p['nome']
-
-        for d in detalhes:
-            if response.id == d["pokemonId"]:
-                response.lendario = d["lendario"]
-
-        pokemon = response.__dict__
-        resultado.append(pokemon)
-
+        response.lendario = detalhes[int(p['id'])]['lendario']
+        response.velocidade = habilidades[int(p['id'])]['velocidade']
+        resultado.append(response.__dict__)
     return resultado

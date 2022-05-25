@@ -6,3 +6,4 @@ waitress~=2.1.1
 python-decouple==3.6
 mysql-connector-python~=8.0.29
 markupsafe==2.0.1
+addict==2.4.0

@@ -15,7 +15,7 @@ class PokemonHabilidadesRepository:
     def find_all_habilidades(self):
         connect = database.get_connection_mysql_db()
         connect.database = self.database_name
-        habilidades = []
+        habilidades = {}
         try:
             select = "SELECT * FROM pokemon_habilidades"
             with connect.cursor() as cursor:
@@ -26,11 +26,10 @@ class PokemonHabilidadesRepository:
                     ataque = int(row[1])
                     defesa = int(row[2])
                     velocidade = int(row[3])
-                    obj = dict({'pokemonID': pokemonID,
-                                'ataque': ataque,
-                                'defesa': defesa,
-                                'velocidade': velocidade})
-                    habilidades.append(obj)
+                    obj = dict({pokemonID: {'ataque': ataque,
+                                            'defesa': defesa,
+                                            'velocidade': velocidade}})
+                    habilidades.update(obj)
             return habilidades
         except Exception as e:
             logging.error(e)

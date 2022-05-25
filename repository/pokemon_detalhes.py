@@ -16,13 +16,13 @@ class PokemonDetalhesRepository:
         collection_pokemon_detalhes = connect[self.collection_name]
         try:
             cursorMongoDB = collection_pokemon_detalhes.find()
-            detalhes = []
+            detalhes = dict()
             for token in cursorMongoDB:
                 pokemonID = int(token['pokemon_id'])
                 geracao = int(token['geracao'])
                 lendario = bool(token['lendario'])
-                obj = dict({'pokemonId': pokemonID,'geracao': geracao,'lendario': lendario})
-                detalhes.append(obj)
+                obj = dict({pokemonID: {'geracao': geracao,'lendario': lendario}})
+                detalhes.update(obj)
             return detalhes
         except Exception as e:
             logging.error(e)
