@@ -1,3 +1,5 @@
+import logging
+
 from repository import database
 
 
@@ -7,15 +9,20 @@ from repository import database
 class PokemonDetalhesRepository:
 
     def __init__(self):
-        self.db = database.get_connection_mongo_db()
+        self.collection_name = 'pokemonDetalhes'
 
     def find_all_detalhes(self):
-        collection_pokemon_detalhes = self.db['pokemonDetalhes']
-        cursorMongoDB = collection_pokemon_detalhes.find()
-        detalhes = []
-        for token in cursorMongoDB:
-            pokemonID = int(token['pokemon_id'])
-            lendario = bool(token['lendario'])
-            obj = dict({"pokemonId": pokemonID, "lendario": lendario})
-            detalhes.append(obj)
-        return detalhes
+        connect = database.get_connection_mongo_db()
+        collection_pokemon_detalhes = connect[self.collection_name]
+        try:
+            cursorMongoDB = collection_pokemon_detalhes.find()
+            detalhes = []
+            for token in cursorMongoDB:
+                pokemonID = int(token['pokemon_id'])
+                geracao = int(token['geracao'])
+                lendario = bool(token['lendario'])
+                obj = dict({'pokemonId': pokemonID,'geracao': geracao,'lendario': lendario})
+                detalhes.append(obj)
+            return detalhes
+        except Exception as e:
+            logging.error(e)

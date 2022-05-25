@@ -53,8 +53,10 @@ def create_data_base_mysql():
     except Exception as e:
         logging.error(e)
     finally:
-        connect.close()
-        logging.info('>>> [MysqlDB] Conexão fechada')
+        if connect.is_connected():
+            cursor.close()
+            connect.close()
+            logging.info('[MySQL] Conexão fechada')
 
 
 def create_table_pokemon_habilidades():
@@ -75,8 +77,10 @@ def create_table_pokemon_habilidades():
     except Exception as e:
         logging.error(e)
     finally:
-        connect.close()
-        logging.info('>>> [MysqlDB] Conexão fechada')
+        if connect.is_connected():
+            cursor.close()
+            connect.close()
+            logging.info('[MySQL] Conexão fechada')
 
 
 def insert_pokemon_habilidades():
@@ -103,5 +107,7 @@ def insert_pokemon_habilidades():
     except Exception:
         raise Exception('Erro ao inserir na table pokemon_habilidades')
     finally:
-        connect.close()
-        logging.info('>>> [MysqlDB] Conexão fechada')
+        if connect.is_connected():
+            cursor.close()
+            connect.close()
+            logging.info('[MySQL] Conexão fechada')
