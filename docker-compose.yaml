@@ -38,6 +38,7 @@ services:
       - .env
     environment:
       - URL_CONEXAO_MONGODB=mongodb://container-mongodb:27017/pokemon-detalhes-db
+      - MYSQL_HOST=container-mysqldb
     build:
       context: .
       dockerfile: Dockerfile

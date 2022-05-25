@@ -3,7 +3,6 @@ from flask_restful import Resource
 from repository.pokemon import PokemonRepository
 from repository.pokemon_detalhes import PokemonDetalhesRepository
 from repository.pokemon_habilidades import PokemonHabilidadesRepository
-
 import logging
 
 # https://flask-restful.readthedocs.io/en/latest/quickstart.html
@@ -32,9 +31,38 @@ class Pokemon(Resource):
 
         logging.info('--------------------------------------------')
 
-        logging.info('3º > Buscando habilidades na base de dados [Mysql]')
-        repository = PokemonHabilidadesRepository()
-        habilidades = repository.find_all_habilidades()
-        logging.info('Total de habilidades encontrados: %s', len(habilidades))
+        #logging.info('3º > Buscando habilidades na base de dados [Mysql]')
+        #repository = PokemonHabilidadesRepository()
+        #habilidades = repository.find_all_habilidades()
+        #logging.info('Total de habilidades encontrados: %s', len(habilidades))
 
-        return jsonify(pokemons)
+        resultado = self.merge(pokemons=pokemons, detalhes=detalhes)
+
+        return jsonify(resultado)
+
+    def merge(self, pokemons, detalhes):
+        resultado = []
+        for p in pokemons:
+            response = Response()
+            response.id = int(p['id'])
+            response.nome = p['nome']
+
+            for d in detalhes:
+                if response.id == d["pokemonId"]:
+                    response.lendario = d["lendario"]
+
+            pokemon = response.__dict__
+            resultado.append(pokemon)
+
+        return resultado
+
+        #pp = pprint.PrettyPrinter(depth=6)
+        #p.pprint(resultado)
+
+
+class Response:
+
+    def __init__(self):
+        self.id = None
+        self.nome = ""
+        self.lendario = False

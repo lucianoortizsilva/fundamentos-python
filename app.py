@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_restful import Api
 from waitress import serve  # https://pypi.org/project/waitress/
 from repository import setup

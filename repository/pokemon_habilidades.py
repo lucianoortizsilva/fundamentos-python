@@ -7,5 +7,4 @@ class PokemonHabilidadesRepository:
         self.db = database.get_connection_mysql_db()
 
     def find_all_habilidades(self):
-        print('Buscar habilidades ...')
         return []
