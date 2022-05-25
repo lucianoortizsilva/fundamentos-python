@@ -9,11 +9,11 @@ import logging
 
 # https://flask-restful.readthedocs.io/en/latest/quickstart.html
 # https://www.datacamp.com/tutorial/json-data-python
-class Pokemon(Resource):
+class Legado(Resource):
 
     def __init__(self):
         logging.basicConfig(level=logging.INFO)
-        logging.info('[GET] /api/pokemons')
+        logging.info('[GET] /api/legado/etl')
 
     @staticmethod
     def get():
@@ -44,7 +44,7 @@ class Pokemon(Resource):
 class Response:
 
     def __init__(self):
-        self.id = None
+        self._id = None
         self.nome = ""
         self.lendario = False
         self.velocidade = None
@@ -84,7 +84,7 @@ def transform(pokemons, detalhes, habilidades):
     resultado = []
     for p in pokemons:
         response = Response()
-        response.id = int(p['id'])
+        response._id = int(p['id'])
         response.nome = p['nome']
         response.lendario = detalhes[int(p['id'])]['lendario']
         response.velocidade = habilidades[int(p['id'])]['velocidade']
@@ -94,7 +94,7 @@ def transform(pokemons, detalhes, habilidades):
 
 
 def load(dados):
-    logging.info('Load datalake - inicio!!!')
+    logging.info("[MongoDB] datalake-db - buscando pokemons - inicio")
     repository = DataLakeRepository()
     repository.insert_pokemons(dados=dados)
-    logging.info('Load datalake - final!!!')
+    logging.info("[MongoDB] datalake-db - buscando pokemons - final")
