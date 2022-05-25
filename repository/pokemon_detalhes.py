@@ -9,10 +9,10 @@ from repository import database
 class PokemonDetalhesRepository:
 
     def __init__(self):
-        self.collection_name = 'pokemonDetalhes'
+        self.collection_name = 'detalhes'
 
     def find_all_detalhes(self):
-        connect = database.get_connection_mongo_db()
+        connect = database.get_connection_mongodb_pokemon()
         collection_pokemon_detalhes = connect[self.collection_name]
         try:
             cursorMongoDB = collection_pokemon_detalhes.find()
@@ -21,7 +21,7 @@ class PokemonDetalhesRepository:
                 pokemonID = int(token['pokemon_id'])
                 geracao = int(token['geracao'])
                 lendario = bool(token['lendario'])
-                obj = dict({pokemonID: {'geracao': geracao,'lendario': lendario}})
+                obj = dict({pokemonID: {'geracao': geracao, 'lendario': lendario}})
                 detalhes.update(obj)
             return detalhes
         except Exception as e:

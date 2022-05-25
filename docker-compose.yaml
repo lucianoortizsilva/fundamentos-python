@@ -15,7 +15,6 @@ services:
       - .docker/db-mongo-log:/log # Mapeando 'docker/fake-db-log' com container
     ports:
       - "27017:27017"
-    restart: unless-stopped
     networks:
       - network_pokemon
 
@@ -37,7 +36,8 @@ services:
     env_file:
       - .env
     environment:
-      - URL_CONEXAO_MONGODB=mongodb://container-mongodb:27017/pokemon-detalhes-db
+      - URL_CONEXAO_MONGODB_POKEMON=mongodb://container-mongodb:27017/pokemon-db
+      - URL_CONEXAO_MONGODB_DATALAKE=mongodb://container-mongodb:27017/datalake_db
       - MYSQL_HOST=container-mysqldb
     build:
       context: .

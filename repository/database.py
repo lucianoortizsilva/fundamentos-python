@@ -2,16 +2,29 @@ import logging
 from decouple import config
 from mysql import connector
 
-
 logging.basicConfig(level=logging.INFO)
 
 
-def get_connection_mongo_db():
-    logging.info('[MongoDB] Conexão aberta')
-    url_conexao = config('URL_CONEXAO_MONGODB')
-    from pymongo import MongoClient
-    client = MongoClient(url_conexao)
-    return client['pokemon-detalhes-db'];
+def get_connection_mongodb_pokemon():
+    try:
+        url_conexao = config('URL_CONEXAO_MONGODB_POKEMON')
+        from pymongo import MongoClient
+        client = MongoClient(url_conexao)
+        logging.info('[MongoDB] Conexão aberta')
+        return client['pokemon_db']
+    except Exception as e:
+        logging.error(e)
+
+
+def get_connection_mongodb_datalake():
+    try:
+        url_conexao = config('URL_CONEXAO_MONGODB_DATALAKE')
+        from pymongo import MongoClient
+        client = MongoClient(url_conexao)
+        logging.info('[MongoDB] Conexão aberta')
+        return client['datalake_db']
+    except Exception as e:
+        logging.error(e)
 
 
 def get_connection_mysql_db():

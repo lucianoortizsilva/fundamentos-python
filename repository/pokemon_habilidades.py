@@ -17,7 +17,7 @@ class PokemonHabilidadesRepository:
         connect.database = self.database_name
         habilidades = {}
         try:
-            select = "SELECT * FROM pokemon_habilidades"
+            select = "SELECT * FROM habilidades"
             with connect.cursor() as cursor:
                 cursor.execute(select)
                 result = cursor.fetchall()

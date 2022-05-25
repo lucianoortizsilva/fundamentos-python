@@ -1,12 +1,11 @@
 import csv
 
+import logging
+
 
 ##############################################
 # https://docs.python.org/3/library/csv.html
 ##############################################
-import logging
-
-
 class PokemonRepository:
 
     def __init__(self):
@@ -23,4 +22,3 @@ class PokemonRepository:
                 return pokemons
         except Exception as e:
             logging.error(e)
-            raise Exception('Erro ao buscar todos pokemons')
