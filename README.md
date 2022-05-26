@@ -1,3 +1,7 @@
+[![Docker Image CI](https://github.com/lucianoortizsilva/pokemon-orquestracao-dados/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/lucianoortizsilva/pokemon-orquestracao-dados/actions/workflows/docker-publish.yml)
+
+<hr>
+
 ### Tecnologias
 
 - <img src="https://badges.aleen42.com/src/python.svg" alt="badge"/> 
