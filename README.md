@@ -1,4 +1,4 @@
-[![Docker Image CI](https://github.com/lucianoortizsilva/pokemon-orquestracao-dados/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/lucianoortizsilva/pokemon-orquestracao-dados/actions/workflows/docker-publish.yml)
+[![Build & Publish Docker Image](https://github.com/lucianoortizsilva/pokemon-orquestracao-dados/actions/workflows/build-publish-docker.yml/badge.svg)](https://github.com/lucianoortizsilva/pokemon-orquestracao-dados/actions/workflows/build-publish-docker.yml)
 
 <hr>
 
