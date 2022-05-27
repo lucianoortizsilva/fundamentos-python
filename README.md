@@ -1,5 +1,4 @@
-[![Build & Publish Docker Image](https://github.com/lucianoortizsilva/pokemon-orquestracao-dados/actions/workflows/build-publish-docker.yml/badge.svg)](https://github.com/lucianoortizsilva/pokemon-orquestracao-dados/actions/workflows/build-publish-docker.yml) [![Create Release](https://github.com/lucianoortizsilva/pokemon-orquestracao-dados/actions/workflows/create-release.yml/badge.svg)](https://github.com/lucianoortizsilva/pokemon-orquestracao-dados/actions/workflows/create-release.yml)
-
+[![Build & Publish Docker Image](https://github.com/lucianoortizsilva/pokemon-orquestracao-dados/actions/workflows/build-publish-docker.yml/badge.svg)](https://github.com/lucianoortizsilva/pokemon-orquestracao-dados/actions/workflows/build-publish-docker.yml) 
 
 ### Tecnologias
 
