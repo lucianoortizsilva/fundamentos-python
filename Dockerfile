@@ -1,19 +1,15 @@
-FROM python:3.8-alpine
+FROM python:3.10.12-slim-bookworm@sha256:13cc673c11ee90d6ba92d95f35f4d8e59148937f1e3b4044788e93268bfe9d2e
 
+ENV TZ="America/Sao_Paulo"
 ENV FLASK_ENV=development
 
-# copy the requirements file into the image
-COPY ./requirements.txt /app/requirements.txt
-
-# switch working directory
 WORKDIR /app
 
-#Atualizando pip
-RUN pip install --upgrade pip
+COPY . .
 
-#Instalar dependências
-RUN pip install -r requirements.txt
-
-COPY . /app
-
-RUN chmod 755 /app/entrypoint.sh
+RUN apt-get update \
+    && apt-get install -y netcat-openbsd \
+    && chmod 777 entrypoint.sh \
+    && apt-get install --no-install-recommends -y python3-pip \
+    && pip3 install -r requirements.txt \
+    && apt-get clean
