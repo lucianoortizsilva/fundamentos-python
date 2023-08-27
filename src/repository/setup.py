@@ -12,7 +12,7 @@ def inserir_carga_dados_inicial():
 
 def insert_mongodb():
     try:
-        with open('db/pokemon_detalhe.csv', mode='r', newline='', encoding='utf8') as f:
+        with open('src/db/pokemon_detalhe.csv', mode='r', newline='', encoding='utf8') as f:
             detalhes = []
             reader = csv.reader(f)
             for row in reader:
@@ -90,7 +90,7 @@ def insert_habilidades():
     insert = 'INSERT INTO habilidades(pokemon_id, attack, defense, speed) VALUES( %s, %s, %s, %s)'
     try:
         logging.info('Insert tabela habilidades')
-        with open('db/pokemon_habilidade.csv', mode='r', newline='', encoding='utf8') as f:
+        with open('src/db/pokemon_habilidade.csv', mode='r', newline='', encoding='utf8') as f:
             habilidades = []
             reader = csv.reader(f)
             for row in reader:

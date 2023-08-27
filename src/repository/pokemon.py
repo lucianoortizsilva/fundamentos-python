@@ -9,7 +9,7 @@ import logging
 class PokemonRepository:
 
     def __init__(self):
-        self.file = 'db/pokemon.csv'
+        self.file = 'src/db/pokemon.csv'
 
     def find_all_pokemons(self):
         try:

@@ -5,11 +5,14 @@ ENV FLASK_ENV=development
 
 WORKDIR /app
 
-COPY . .
+COPY src ./src
+COPY requirements.txt ./requirements.txt
+COPY entrypoint.sh ./entrypoint.sh
+
 
 RUN apt-get update \
     && apt-get install -y netcat-openbsd \
-    && chmod 777 entrypoint.sh \
+    && chmod 777 ./entrypoint.sh \
     && apt-get install --no-install-recommends -y python3-pip \
-    && pip3 install -r requirements.txt \
+    && pip3 install -r ./requirements.txt \
     && apt-get clean

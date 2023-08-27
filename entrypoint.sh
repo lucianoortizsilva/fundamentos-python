@@ -18,4 +18,4 @@ done
 
 echo ">>> container-mysqldb iniciado com sucesso!!!"
 
-python app.py
+python src/app.py
