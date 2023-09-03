@@ -13,10 +13,10 @@ class Legado(Resource):
 
     def __init__(self):
         logging.basicConfig(level=logging.INFO)
-        logging.info('[GET] /api/legado/etl')
+        logging.info('[POST] /api/legado/etl')
 
     @staticmethod
-    def get():
+    def post():
         try:
             logging.info('################')
             logging.info('##### EXTRACT')
